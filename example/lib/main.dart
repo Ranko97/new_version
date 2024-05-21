@@ -20,27 +20,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  @override
-  void initState() {
-    super.initState();
-
-    // Instantiate NewVersion manager object (Using GCP Console app as example)
-    final newVersion = NewVersion(
-      iOSId: 'com.google.Vespa',
-      androidId: 'com.google.android.apps.cloudconsole',
-    );
-
-    // You can let the plugin handle fetching the status and showing a dialog,
-    // or you can fetch the status and display your own dialog, or no dialog.
-    const simpleBehavior = true;
-
-    if (simpleBehavior) {
-      basicStatusCheck(newVersion);
-    } else {
-      advancedStatusCheck(newVersion);
-    }
-  }
-
   basicStatusCheck(NewVersion newVersion) {
     newVersion.showAlertIfNecessary(context: context);
   }
@@ -66,7 +45,32 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Example App"),
+        title: Column(
+          children: [
+            Center(
+              child: ElevatedButton(
+                onPressed: () {
+                  // Instantiate NewVersion manager object (Using GCP Console app as example)
+                  final newVersion = NewVersion(
+                      // iOSId: 'com.flexyremit.flexy',
+                      // androidId: 'com.flexyremit.flexy',
+                      );
+
+                  // You can let the plugin handle fetching the status and showing a dialog,
+                  // or you can fetch the status and display your own dialog, or no dialog.
+                  const simpleBehavior = true;
+
+                  if (simpleBehavior) {
+                    basicStatusCheck(newVersion);
+                  } else {
+                    advancedStatusCheck(newVersion);
+                  }
+                },
+                child: Text("Example App"),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
